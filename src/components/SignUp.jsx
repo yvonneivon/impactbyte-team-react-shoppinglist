@@ -1,159 +1,118 @@
-import React, { Component } from "react";
-import { Formik } from "formik";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { withRouter } from 'react-router-dom';
 
-class SignUp extends Component {
+class SignUp extends React.Component {
     render() {
         return (
-            <div>
+            <div style={{ textAlign: 'center' }}>
                 <h1>Sign Up</h1>
-                <div style={{ textAlign: "center" }}>
-                    <Formik
-                        initialValues={{
-                            fullname: "",
-                            username: "",
-                            email: "",
-                            password: "",
-                        }}
-                        validate={(values) => {
-                            const errors = {};
-                            if (values.email === "") {
-                                errors.email = "Required";
-                            } else if (
-                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                                    values.email
-                                )
-                            ) {
-                                errors.email = "Invalid email address";
-                            } else if (values.password.length < 8) {
-                                errors.password =
-                                    "Minimum password 8 character";
-                            }
-                            return errors;
-                        }}
-                        onSubmit={(values) => {
-                            const url =
-                                "https://5e9fab2711b078001679ca71.mockapi.io/users";
-                            const options = {
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify(values),
-                                method: "POST",
-                            };
+                <Formik
+                    initialValues={{
+                        fullName: '',
+                        username: '',
+                        email: '',
+                        password: '',
+                    }}
+                    validate={(values) => {
+                        const errors = {};
 
-                            fetch(url, options)
-                                .then((response) => {
-                                    return response.json();
-                                })
-                                .then((result) => {
-                                    alert("Register succeed!");
-                                    this.props.history.push("/signin");
-                                });
-                        }}
-                    >
-                        {({
-                            values,
-                            errors,
-                            touched,
-                            handleChange,
-                            handleBlur,
-                            handleSubmit,
-                            isSubmitting,
-                        }) => {
-                            return (
-                                <form onSubmit={handleSubmit}>
-                                    <div>
-                                        <input
-                                            type="text"
-                                            name="fullname"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.fullname}
-                                            placeholder="fullname"
-                                        />
-                                        <span
-                                            style={{
-                                                color: "red",
-                                                fontStyle: "italic",
-                                            }}
-                                        >
-                                            {errors.fullname &&
-                                                touched.fullname &&
-                                                errors.fullname}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="text"
-                                            name="username"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.username}
-                                            placeholder="username"
-                                        />
-                                        <span
-                                            style={{
-                                                color: "red",
-                                                fontStyle: "italic",
-                                            }}
-                                        >
-                                            {errors.username &&
-                                                touched.username &&
-                                                errors.username}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.email}
-                                            placeholder="email"
-                                        />
-                                        <span
-                                            style={{
-                                                color: "red",
-                                                fontStyle: "italic",
-                                            }}
-                                        >
-                                            {errors.email &&
-                                                touched.email &&
-                                                errors.email}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="password"
-                                            name="password"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.password}
-                                            placeholder="password"
-                                        />
-                                        <span
-                                            style={{
-                                                color: "red",
-                                                fontStyle: "italic",
-                                            }}
-                                        >
-                                            {errors.password &&
-                                                touched.password &&
-                                                errors.password}
-                                        </span>
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                    >
-                                        Submit
-                                    </button>
-                                </form>
-                            );
-                        }}
-                    </Formik>
-                </div>
+                        // Validasi untuk nama lengkap
+                        // 1. Jika nama lengkap kosong, maka keluarkan "Nama lengkap harus diisi"
+                        if (!values.fullName) {
+                            errors.fullName = 'Nama lengkap harus diisi';
+                        }
+
+                        // Validasi untuk username
+                        // 1. Jika username kosong, maka keluarkan "Username harus diisi"
+                        if (!values.username) {
+                            errors.username = 'Username harus diisi';
+                        }
+
+                        // Validasi untuk email
+                        // 1. Jika email kosong, maka keluarkan "Email harus diisi"
+                        if (!values.email) {
+                            errors.email = 'Email harus diisi';
+                        }
+                        // 2. Kalau email tidak valid, maka keluarkan "Masukkan email yang valid"
+                        else if (
+                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                                values.email
+                            )
+                        ) {
+                            errors.email = 'Masukan email yang valid';
+                        }
+
+                        // Validasi untuk password
+                        if (!values.password) {
+                            errors.password = 'Password harus diisi';
+                        } else if (values.password.length <= 8) {
+                            errors.password =
+                                'Password harus terdiri dari minimal 8 karakter';
+                        }
+                        return errors;
+                    }}
+                    onSubmit={(values) => {
+                        const url =
+                            'https://5e9407d7c7393c0016de4cfc.mockapi.io/users';
+
+                        const options = {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(values),
+                        };
+
+                        fetch(url, options)
+                            .then((response) => response.json())
+                            .then((result) => {
+                                alert('Registrasi berhasil! Silahkan login!');
+                                this.props.history.push('/signin');
+                            })
+                            .catch((error) => console.log(error));
+                    }}
+                >
+                    {({ isSubmitting }) => (
+                        <Form>
+                            <div>
+                                <Field
+                                    type='text'
+                                    name='fullName'
+                                    placeholder='Nama Lengkap'
+                                />
+                                <ErrorMessage name='fullName' component='div' />
+                            </div>
+                            <div>
+                                <Field
+                                    type='text'
+                                    name='username'
+                                    placeholder='Username'
+                                />
+                                <ErrorMessage name='username' component='div' />
+                            </div>
+                            <div>
+                                <Field
+                                    type='email'
+                                    name='email'
+                                    placeholder='Email'
+                                />
+                                <ErrorMessage name='email' component='div' />
+                            </div>
+                            <div>
+                                <Field
+                                    type='password'
+                                    name='password'
+                                    placeholder='Password'
+                                />
+                                <ErrorMessage name='password' component='div' />
+                            </div>
+                            <button type='submit' disabled={isSubmitting}>
+                                Submit
+                            </button>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         );
     }
