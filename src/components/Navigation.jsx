@@ -1,20 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./css/navigation.css"
 
 const Navigation = () => {
     return (
-        <ul>
+        <ul id="Nav_menu">
             <li>
-                <Link to="/">Beranda</Link>
+                <NavLink to="/"
+
+                >Beranda
+                </NavLink>
             </li>
             <li>
-                <Link to="/mockapi">Mock API</Link>
+                <NavLink
+                    to="/signin"
+                    className="Nav_link"
+                    activeClassName="activeRoute"
+                    activeStyle={{ color: 'teal' }}
+                >Sign
+                </NavLink>
             </li>
             <li>
-                <Link to="/signin">Enter</Link>
+                <NavLink
+                    to="/signup"
+                    className="Nav_link"
+                    activeClassName="activeRoute"
+                    activeStyle={{ color: 'teal' }}
+                >Sign up
+                </NavLink>
             </li>
             <li>
-                <Link to="/signup">Sign up</Link>
+                <NavLink
+                    to="/shoppinglist"
+                    className="Nav_link"
+                    activeClassName="activeRoute"
+                    activeStyle={{ color: 'teal' }}
+                >Shopping List
+                </NavLink>
             </li>
         </ul>
     );

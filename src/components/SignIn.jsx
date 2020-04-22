@@ -30,7 +30,7 @@ export default function SignIn() {
                     }}
                     onSubmit={async (values) => {
                         const url =
-                            "https://5e9fab2711b078001679ca71.mockapi.io/users";
+                            "https://5e9fab2711b078001679ca71.mockapi.io/user";
                         const response = await fetch(url);
                         const result = await response.json();
 
@@ -48,7 +48,7 @@ export default function SignIn() {
                             alert('Wrong e-mail or password');
                         } else {
                             alert(
-                                `Hello ${existingUser.fullname}`
+                                `Hello ${existingUser.email}`
                             );
                             history.push("/ShoppingList");
                         }

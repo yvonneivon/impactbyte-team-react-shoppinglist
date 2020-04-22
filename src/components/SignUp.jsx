@@ -10,8 +10,6 @@ class SignUp extends Component {
                 <div style={{ textAlign: "center" }}>
                     <Formik
                         initialValues={{
-                            fullname: "",
-                            username: "",
                             email: "",
                             password: "",
                         }}
@@ -33,7 +31,7 @@ class SignUp extends Component {
                         }}
                         onSubmit={(values) => {
                             const url =
-                                "https://5e9fab2711b078001679ca71.mockapi.io/users";
+                                "https://5e9fab2711b078001679ca71.mockapi.io/user";
                             const options = {
                                 headers: {
                                     "Content-Type": "application/json",
@@ -63,46 +61,7 @@ class SignUp extends Component {
                         }) => {
                             return (
                                 <form onSubmit={handleSubmit}>
-                                    <div>
-                                        <input
-                                            type="text"
-                                            name="fullname"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.fullname}
-                                            placeholder="fullname"
-                                        />
-                                        <span
-                                            style={{
-                                                color: "red",
-                                                fontStyle: "italic",
-                                            }}
-                                        >
-                                            {errors.fullname &&
-                                                touched.fullname &&
-                                                errors.fullname}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="text"
-                                            name="username"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.username}
-                                            placeholder="username"
-                                        />
-                                        <span
-                                            style={{
-                                                color: "red",
-                                                fontStyle: "italic",
-                                            }}
-                                        >
-                                            {errors.username &&
-                                                touched.username &&
-                                                errors.username}
-                                        </span>
-                                    </div>
+
                                     <div>
                                         <input
                                             type="email"
