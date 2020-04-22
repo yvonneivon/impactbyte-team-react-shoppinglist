@@ -33,7 +33,7 @@ class SignUp extends Component {
                         }}
                         onSubmit={(values) => {
                             const url =
-                                "https://5e9fab2711b078001679ca71.mockapi.io/users";
+                                "https://5e9fab2711b078001679ca71.mockapi.io/user";
                             const options = {
                                 headers: {
                                     "Content-Type": "application/json",

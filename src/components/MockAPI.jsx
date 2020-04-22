@@ -12,7 +12,7 @@ export default class MockAPI extends Component {
     }
 
     componentDidMount = async () => {
-        const url = "https://5e9fab2711b078001679ca71.mockapi.io/users";
+        const url = "https://5e9fab2711b078001679ca71.mockapi.io/user";
 
         // fetching async await
         const response = await fetch(url);
