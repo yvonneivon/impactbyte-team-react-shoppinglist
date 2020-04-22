@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navigation from './components/Navigation';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import Home from './components/pages/Home';
+import SignUp from './components/pages/SignUp';
+import SignIn from './components/pages/SignIn';
 
 function App() {
     return (
@@ -12,14 +13,13 @@ function App() {
 
             <Switch>
                 <Route exact path='/'>
-                    <SignUp />
-                </Route>
-
-                <Route exact path='/signin'>
-                    <SignIn />
+                    <Home />
                 </Route>
                 <Route exact path='/signup'>
                     <SignUp />
+                </Route>
+                <Route exact path='/signin'>
+                    <SignIn />
                 </Route>
             </Switch>
         </Router>

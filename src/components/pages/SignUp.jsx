@@ -53,8 +53,7 @@ class SignUp extends React.Component {
                         return errors;
                     }}
                     onSubmit={(values) => {
-                        const url =
-                            'https://5e9407d7c7393c0016de4cfc.mockapi.io/users';
+                        const url = `${process.env.REACT_APP_MOCKAPI_URL}/users`;
 
                         const options = {
                             method: 'POST',
